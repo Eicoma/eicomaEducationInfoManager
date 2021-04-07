@@ -12,6 +12,7 @@ public class StudentController {
     StudentService studentService = new StudentService();
 
 
+
     public void start() {
         studentLoop:
         while (true) {
@@ -30,6 +31,7 @@ public class StudentController {
                     break;
                 case "3":
                     System.out.println("修改学生信息");
+                    updateStudent();
                     break;
                 case "4":
                     System.out.println("查询学生信息");
@@ -44,6 +46,24 @@ public class StudentController {
             }
         }
 
+    }
+
+    private void updateStudent() {
+        String inputId;
+        boolean flag = false;
+        while (true) {
+            System.out.println("请输入学生学号");
+            inputId = sc.next();
+            flag = studentService.isExists(inputId);
+            if (flag) {
+                break;
+            } else {
+                System.out.println("您输入的学号不存在，请重新输入");
+            }
+        }
+        Student newStu = inputStudentInfo(inputId);
+        studentService.updateStudent(inputId,newStu);
+        System.out.println("学生信息修改成功！");
     }
 
     public void deleteStudent() {
@@ -111,6 +131,7 @@ public class StudentController {
         String age = sc.next();
         System.out.println("请输入生日");
         String birthday = sc.next();
+        //该对象的创建必须放在该方法内
         Student stu = new Student();
         stu.setId(inputId);
         stu.setName(name);

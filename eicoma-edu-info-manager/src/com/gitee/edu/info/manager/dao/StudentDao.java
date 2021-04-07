@@ -38,4 +38,14 @@ public class StudentDao {
             }
         }
     }
+
+    public void updateStudent(String inputId, Student newStu) {
+        for (int i = 0; i < stuArray.length; i++) {
+            Student stu = stuArray[i];
+            if (stu != null && stu.getId().equals(inputId)){
+                stuArray[i] = newStu;
+                break;
+            }
+        }
+    }
 }
